@@ -1,22 +1,20 @@
-const { Schema, model } = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    unique:true,
-    trim: true,
-    required: 'username is required',
-  },
+const app = express();
+const PORT = 3001;
 
-  email: {
-    type: String,
-    unique:true,
-    required:'email is required',
-    match: [/.+@.+\..+/, 'Please enter a valid e-mail address']
-  },
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
-});
+mongoose.connect("mongodb://localhost/social_network_db", {
+  useFindAndModify: false, 
+  useNewUrlParsertrue,
+  useUnifiedTopology:true})
 
-const User = model('User', userSchema);
+mongoose.set("useCreateIndex", true);
+mongoose.set("debug", true);
 
-module.exports = User;
+app.listen(PORT, () => {
+  console.log(`Listening on PORT: ${PORT}`)
+})
