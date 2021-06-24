@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../../models/User");
 
-//READ (FIND) REQUESTS
+//GET USERS
 router.get("/", (req, res) => {
   User.find()
     .populate({
@@ -18,6 +18,8 @@ router.get("/", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+//GET USER by ID
 router.get("/:userid", (req, res) => {
   User.findById(req.params.userid)
     .populate({
@@ -31,7 +33,7 @@ router.get("/:userid", (req, res) => {
       res.status(500).json(err);
     });
 });
-//POST CREATE REQUESTS
+//CREATE USER
 router.post("/", (req, res) => {
   User.create(req.body)
     .then((data) => {
@@ -41,9 +43,11 @@ router.post("/", (req, res) => {
       res.status(500).json(err);
     });
 });
-//UPDATE PUT REQUESTS
+
+//UPDATE USER
 router.put("/:userid", (req, res) => {
-  User.findByIdAndUpdate(req.params.userid, req.body, { new: true })
+  User.findByIdAndUpdate(
+    req.params.userid, req.body, { new: true })
     .then((data) => {
       res.status(200).json(data);
     })
@@ -51,9 +55,21 @@ router.put("/:userid", (req, res) => {
       res.status(500).json(err);
     });
 });
-//DELETE DELETE REQUESTS
+
+//DELETE USER
 router.delete("/:userid", (req, res) => {
   User.findOneAndDelete({ _id: req.params.userid })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+//ADD FRIEND TO EXISTING USER
+router.put("/:userid/friends", (req, res) => {
+  User.findByIdAndUpdate(req.params.userid, {$push: { friends: req.body.friend_id }}, { new: true })
     .then((data) => {
       res.status(200).json(data);
     })
