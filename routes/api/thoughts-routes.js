@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Thought = require("../../models/Thought");
 const User = require("../../models/User");
 
+// GET ALL THOUGHTS
 router.get("/", (req, res) => {
   Thought.find({})
     .then((data) => {
@@ -12,6 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
+// GET THOUGHT By ID
 router.get("/:thoughtid", (req, res) => {
   Thought.findById(req.params.thoughtid)
     .then((data) => {
@@ -22,6 +24,7 @@ router.get("/:thoughtid", (req, res) => {
     });
 });
 
+// POST NEW THOUGHT
 router.post("/", (req, res) => {
   Thought.create(req.body)
   .then(data => {
@@ -32,6 +35,17 @@ router.post("/", (req, res) => {
           { new: true }
         );
     })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+//DELETE THOUGHT by ID
+router.delete("/:thoughtid", (req, res) => {
+  Thought.findOneAndDelete({ _id: req.params.thoughtid })
     .then((data) => {
       res.status(200).json(data);
     })
