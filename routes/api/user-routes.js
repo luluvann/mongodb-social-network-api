@@ -67,9 +67,20 @@ router.delete("/:userid", (req, res) => {
     });
 });
 
-//ADD FRIEND TO EXISTING USER
-router.put("/:userid/friends", (req, res) => {
+//ADD A FRIEND TO AN EXISTING USER
+router.put("/:userid/friends/add", (req, res) => {
   User.findByIdAndUpdate(req.params.userid, {$push: { friends: req.body.friend_id }}, { new: true })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+//DELETE A FRIEND TO AN EXISTING USER
+router.put("/:userid/friends/delete", (req, res) => {
+  User.findByIdAndUpdate(req.params.userid, {$pull: { friends: req.body.friend_id }}, { new: true })
     .then((data) => {
       res.status(200).json(data);
     })
