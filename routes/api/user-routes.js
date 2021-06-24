@@ -7,10 +7,10 @@ router.get("/", (req, res) => {
     .populate({
       path: "thoughts",
       select: "-__v"})
-    .populate({
+/*     .populate({
       path: "friends",
       select: "-__v"
-    })
+    }) */
     .then((data) => {
       res.status(200).json(data);
     })
