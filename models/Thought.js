@@ -1,5 +1,21 @@
 const { Schema, model } = require('mongoose');
 
+const ReactionSchema = new Schema({
+  reactionBody: {
+    type: String,
+    required: true,
+    maxLength: 280
+  },
+  username: {
+    type: String,
+    required: 'Username who created the reaction is required'
+  },
+  createdAt: {
+    type: Date,
+    default:Date.now,
+  }
+})
+
 const ThoughtSchema = new Schema({
   thoughtText: {
     type: String,
@@ -12,6 +28,15 @@ const ThoughtSchema = new Schema({
     type: Date,
     default:Date.now,
   },
+
+  username: {
+    type: String,
+    required: 'Username who created the thought is required'
+  },
+
+  reactions:{
+    ReactionSchema
+  }
 
 });
 
