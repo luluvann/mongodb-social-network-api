@@ -60,7 +60,7 @@ nodemon server.js
 - http://localhost:3001/api/thoughts/:thoughtId/reactions/delete
 
 ## Screenshot
-![](./screenshot.png)
+![screenshot](./screenshot.PNG)
 
 ## Technologies
 - MongoDB (NoSQL)
