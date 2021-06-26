@@ -44,6 +44,17 @@ router.post("/", (req, res) => {
     });
 });
 
+//UPDATE THOUGHT by Id
+router.put("/:thoughtid", (req, res) => {
+  Thought.findByIdAndUpdate(req.params.thoughtid, req.body, { new: true })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
 //DELETE THOUGHT by ID
 router.delete("/:thoughtid", (req, res) => {
   Thought.findOneAndDelete({ _id: req.params.thoughtid })
