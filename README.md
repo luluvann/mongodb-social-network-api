@@ -13,6 +13,7 @@ Social Media API using Express.js and Mongoose ODM for MongoDB NoSQL database
 * [Installation](#installation)
 * [Usage](#usage)
 * [Main Endpoints](#main-endpoints)
+* [Screenshot](#screenshot)
 * [Technologies](#technologies)
 
 ## User Story
@@ -57,6 +58,9 @@ nodemon server.js
 - http://localhost:3001/api/thoughts
 - http://localhost:3001/api/thoughts/:thoughtId/reactions/add
 - http://localhost:3001/api/thoughts/:thoughtId/reactions/delete
+
+## Screenshot
+![](./screenshot.png)
 
 ## Technologies
 - MongoDB (NoSQL)
