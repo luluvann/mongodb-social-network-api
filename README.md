@@ -4,7 +4,9 @@
 Social Media API using Express.js and Mongoose ODM for MongoDB NoSQL database
 
 ## Walktrough video
-[]()
+[Walkthrough video](https://drive.google.com/file/d/129P4xYIfR-jTC5YNSLok_WEdSshdyaTN/view)
+
+[Bonus](https://drive.google.com/file/d/1m1e9c-zcC_ItMkjzFDsv7sEupUk3skqX/view)
 
 ## Table of Contents
 
