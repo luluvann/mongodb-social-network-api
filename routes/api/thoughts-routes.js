@@ -75,7 +75,6 @@ router.put("/:thoughtid/reactions/add", (req, res) => {
 router.put("/:thoughtid/reactions/delete", (req, res) => {
   Thought.findByIdAndUpdate(
     req.params.thoughtid,
-
     { $pull: { reactions: { _id: req.body._id } } },
     { new: true }
   )
