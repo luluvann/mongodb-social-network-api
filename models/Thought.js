@@ -5,10 +5,12 @@ const ReactionSchema = new Schema({
     type: String,
     required: true,
     maxLength: 280,
+    default:""
   },
   username: {
     type: String,
     required: "Username who created the reaction is required",
+    default:""
   },
   createdAt: {
     type: Date,
