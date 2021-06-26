@@ -59,6 +59,9 @@ router.put("/:thoughtid", (req, res) => {
 router.delete("/:thoughtid", (req, res) => {
   Thought.findOneAndDelete({ _id: req.params.thoughtid })
     .then((data) => {
+      return User.findOneAndUpdate({username: data.username},{ $pull: { thoughts: req.params.thoughtid } },{ new: true })
+    })
+    .then((data) => {
       res.status(200).json(data);
     })
     .catch((err) => {
