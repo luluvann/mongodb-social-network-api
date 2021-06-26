@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
       path: "thoughts",
       select: "-__v",
     })
-    .populate("friends","-__v")
     .then((data) => {
       res.status(200).json(data);
     })
@@ -65,10 +64,10 @@ router.delete("/:userid", (req, res) => {
 });
 
 //ADD A FRIEND TO AN EXISTING USER
-router.put("/:userid/friends/add", (req, res) => {
+router.post("/:userid/friends/:friendid", (req, res) => {
   User.findByIdAndUpdate(
     req.params.userid,
-    { $push: { friends: req.body.friend_id } },
+    { $push: { friends: req.params.friendid } },
     { new: true }
   )
     .then((data) => {
@@ -81,7 +80,7 @@ router.put("/:userid/friends/add", (req, res) => {
   //when a user is adding another user as a friend, the first user gets also added as a friend to the user he/she is adding (mutuall adding)  
 
   User.findByIdAndUpdate(
-    req.body.friend_id,
+    req.params.friendid,
     { $push: { friends: req.params.userid } },
     { new: true }
   )
@@ -94,10 +93,10 @@ router.put("/:userid/friends/add", (req, res) => {
 });
 
 //DELETE A FRIEND TO AN EXISTING USER
-router.put("/:userid/friends/delete", (req, res) => {
+router.delete("/:userid/friends/:friendid", (req, res) => {
   User.findByIdAndUpdate(
     req.params.userid,
-    { $pull: { friends: req.body.friend_id } },
+    { $pull: { friends: req.params.friendid } },
     { new: true }
   )
     .then((data) => {
@@ -106,6 +105,18 @@ router.put("/:userid/friends/delete", (req, res) => {
     .catch((err) => {
       res.status(500).json(err);
     });
+
+    User.findByIdAndUpdate(
+      req.params.friendid,
+      { $pull: { friends: req.params.userid } },
+      { new: true }
+    )
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
 });
 
 module.exports = router;
