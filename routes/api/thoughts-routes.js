@@ -4,8 +4,9 @@ const User = require("../../models/User");
 
 // GET ALL THOUGHTS
 router.get("/", (req, res) => {
-  Thought.find({})
+  Thought.find()
     .then((data) => {
+      console.log(data)
       res.status(200).json(data);
     })
     .catch((err) => {
@@ -54,15 +55,32 @@ router.delete("/:thoughtid", (req, res) => {
     });
 });
 
-//CREATE REACTION to exisiting thought
-router.post("/:thoughtid/reactions/add", (req, res) => {
-  console.log(req.body)
+//CREATE REACTION to existing thought
+router.put("/:thoughtid/reactions/add", (req, res) => {
+  console.log(req.body);
   Thought.findByIdAndUpdate(
     req.params.thoughtid,
     { $push: { reactions: req.body } },
     { new: true }
   )
     .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+//DELETE REACTION to existing thought
+router.put("/:thoughtid/reactions/delete", (req, res) => {
+  Thought.findByIdAndUpdate(
+    req.params.thoughtid,
+
+    { $pull: { reactions: { _id: req.body._id } } },
+    { new: true }
+  )
+    .then((data) => {
+      console.log(data)
       res.status(200).json(data);
     })
     .catch((err) => {

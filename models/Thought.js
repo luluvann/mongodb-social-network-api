@@ -34,7 +34,7 @@ const ThoughtSchema = new Schema({
     required: "Username who created the thought is required",
   },
 
-  reactions: [{ ReactionSchema }],
+  reactions: { type: [ReactionSchema] }
 });
 
 const Thought = model("Thought", ThoughtSchema);
