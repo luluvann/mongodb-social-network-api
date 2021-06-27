@@ -8,9 +8,44 @@ Social Media API using Express.js and Mongoose ODM for MongoDB NoSQL database
 
 [Bonus](https://drive.google.com/file/d/1m1e9c-zcC_ItMkjzFDsv7sEupUk3skqX/view)
 
+## Video Minutes
+
+1st video
+- 00:00 - start server
+- 00:10 - create 4 users (user1, user2, user3, user4)
+- 00:33 - validator input email
+- 00:40 - get all users
+- 00:49 - get user4 by id
+- 00:55 - update user4's email
+- 01:01 - delete user4
+- 01:09 - check that user4 has been deleted
+- 01:17 - add 2 friends (user2 and user3) to user1 
+- 01:44 - check that the 2 friends have been added to user1's friends list and check count
+- 01:55 - delete user3 from user1's friend list
+- 02:08 - check that user3 has been deleted from user1's friend list
+- 02:17 - create a new thought (thought 1) assigned to user1
+- 02:21 - check that thought 1 has been added to user1
+- 02:31 - get all thoughts
+- 02:37 - create thought 2 assigned to user2
+- 02:44 - get thought 1 by id
+- 02:48 - update thought 1 body
+- 02:58 - check that thought 1 has been updated
+- 03:09 - populate thoughts for user1 and check that thought 1 has been updated
+- 03:26 - delete thought 1
+- 03:35 - check that thought 1 has been deleted and doesn't populate in user1's thoughts
+- 03:49 - create a reaction to thought 2 that is associated to user3
+- 03:58 - check that reaction has been added to thought 2
+- 04:03 - delete reaction 1
+
+BONUS : 
+
+user2 has one thought and when the user2 gets deleted, the associated thought is also deleted
+
+
 ## Table of Contents
 
 * [Walkthrough Video](#walkthrough-video)
+* [Minutes](#video-minutes)
 * [User Story](#user-story)
 * [Installation](#installation)
 * [Usage](#usage)
